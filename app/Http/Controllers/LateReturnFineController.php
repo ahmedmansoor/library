@@ -43,7 +43,7 @@ class LateReturnFineController extends Controller
 
         $fine = LateReturnFine::create($validated);
 
-        return redirect()->route('late_return_fines.index')
+        return redirect()->route('fines.index')
             ->with('success', 'Fine created successfully.');
     }
 
@@ -58,11 +58,11 @@ class LateReturnFineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LateReturnFine $lateReturnFine)
+    public function edit(LateReturnFine $fine)
     {
         $borrows = Borrow::all();
 
-        return view('pages.fines.edit', compact('lateReturnFine', 'borrows'));
+        return view('pages.fines.edit', compact('fine', 'borrows'));
     }
 
     /**
@@ -74,12 +74,11 @@ class LateReturnFineController extends Controller
             'borrow_id' => 'required|exists:borrows,id',
             'amount' => 'required|numeric|min:0',
             'payment_type' => 'required',
-            'payment_date' => 'required|date',
         ]);
 
         $fine->update($validated);
 
-        return redirect()->route('late_return_fines.index')
+        return redirect()->route('fines.index')
             ->with('success', 'Fine updated successfully.');
     }
 
@@ -89,7 +88,7 @@ class LateReturnFineController extends Controller
     public function destroy(LateReturnFine $fine)
     {
         $fine->delete();
-        return redirect()->route('late_return_fines.index')
+        return redirect()->route('fines.index')
             ->with('success', 'Fine deleted successfully');
     }
 }

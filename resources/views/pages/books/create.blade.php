@@ -5,7 +5,7 @@
 <section class="wrapper flex flex-col md:flex-row md:justify-between md:space-x-10">
     <div class="ml-72 w-2/3">
         <div class="flex flex-row justify-between mb-5">
-            <h4 class="text-xl">New book</h4>
+            <h4 class="h4">New book</h4>
         </div>
         <div class="container">
             <form method="POST" action="{{ route('books.store') }}" class="form">

@@ -11,7 +11,6 @@
     <!-- Scripts -->
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/darkmode.js') }}" defer></script>
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC

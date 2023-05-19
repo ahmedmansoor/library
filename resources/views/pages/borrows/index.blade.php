@@ -6,7 +6,7 @@
 <section class="wrapper flex flex-col md:flex-row md:justify-between md:space-x-10">
     <div class="ml-72 w-2/3">
         <div class="flex flex-row justify-between mb-10">
-            <h4 class="text-xl">Borrows</h4>
+            <h4 class="h4">Borrows</h4>
             <div>
                 <a href="{{route('returns.create')}}" class="btn-primary" />
                     Return book

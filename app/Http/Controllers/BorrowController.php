@@ -80,7 +80,7 @@ class BorrowController extends Controller
             'issue_date' => 'required|date',
             'due_date' => 'required|date|after:issue_date',
             'return_date' => 'nullable|date|after:issue_date',
-            'fine_amount' => $borrow->is_late ? 'required|numeric|min:0' : 'nullable',
+            'amount' => $borrow->is_late ? 'required|numeric|between:0,999.99' : 'nullable',
             'payment_type' => $borrow->is_late ? 'required|in:cash,credit_card,debit_card' : 'nullable',
         ]);
 
@@ -90,7 +90,7 @@ class BorrowController extends Controller
             $borrow->late_return_fine()->updateOrCreate(
                 ['borrow_id' => $borrow->id],
                 [
-                    'amount' => $request->fine_amount,
+                    'amount' => $request->amount,
                     'payment_type' => $request->payment_type,
                     'payment_date' => now(),
                 ]

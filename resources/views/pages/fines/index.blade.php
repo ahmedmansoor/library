@@ -6,7 +6,7 @@
 <section class="wrapper flex flex-col md:flex-row md:justify-between md:space-x-10">
     <div class="ml-72 w-2/3">
         <div class="flex flex-row justify-between mb-10">
-            <h4 class="text-xl">Fines</h4>
+            <h4 class="h4">Fines</h4>
             <div>
                 <a href="{{route('fines.create')}}" class="btn-primary" />
                     Record a checkout
@@ -27,7 +27,7 @@
                             Fine Amount
                         </th>
                         <th scope="col" class="th">
-                            Paid
+                            Type
                         </th>
                         <th scope="col" class="th">
                             <span class="sr-only">Edit</span>
@@ -48,7 +48,7 @@
                         {{ $fine->amount }}
                         </td>
                         <td class="td">
-                        {{ $fine->paid ? 'Yes' : 'No' }}
+                        {{ $fine->payment_type }}
                         </td>
                         <td class="px-6 py-4 text-right">
                             <button id="dropdownMenuIconButton{{ $fine->id }}" data-dropdown-toggle="dropdownDots{{ $fine->id }}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-bg_dark dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
@@ -56,6 +56,7 @@
                             </button>
                         </td>
                     </tr>
+                    @include('pages.fines.index-dropdown')
                     @endforeach
                     @endif
                 </tbody>

@@ -22,7 +22,7 @@ export default {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary: "#4f6e4b",
+                primary: "#258169",
                 primary_light: "#fff1eb",
                 primary_hard: "#205F4F",
                 bg: "#eadec7",

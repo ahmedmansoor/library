@@ -5,7 +5,7 @@
 <section class="wrapper flex flex-col md:flex-row md:justify-between md:space-x-10">
     <div class="ml-72 w-2/3">
         <div class="flex flex-row justify-between mb-5">
-            <h4 class="text-xl">Edit checkout</h4>
+            <h4 class="h4">Edit checkout</h4>
         </div>
         <form action="{{ route('borrows.update', ['borrow' => $borrow->id]) }}" method="POST" class="form">
             @csrf
@@ -50,8 +50,8 @@
 
             @if($borrow->is_late)
                 <div class="form-group">
-                    <label for="fine_amount" class="label">Fine Amount</label>
-                    <input type="number" id="fine_amount" name="fine_amount" class="input-field form-control">
+                    <label for="amount" class="label">Fine Amount</label>
+                    <input type="number" id="amount" name="amount" class="input-field form-control">
                 </div>
 
                 <div class="form-group">
