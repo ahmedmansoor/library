@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('return_date')->nullable();
             $table->enum('is_late', ['no', 'yes']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

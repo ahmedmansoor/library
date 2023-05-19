@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         // Borrower::factory(10)->create();
         // Book::factory(10)->create();
-        Borrow::factory(10)->create();
-        LateReturnFine::factory(10)->create();
+        // Borrow::factory(10)->create();
+        // LateReturnFine::factory(10)->create();
     }
 }

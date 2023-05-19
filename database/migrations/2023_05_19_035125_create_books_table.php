@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('isbn');
             $table->integer('year');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

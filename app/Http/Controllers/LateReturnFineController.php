@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Borrow;
 use App\Models\LateReturnFine;
 use Illuminate\Http\Request;
 
@@ -12,15 +13,20 @@ class LateReturnFineController extends Controller
      */
     public function index()
     {
-        //
+        $fines = LateReturnFine::with('borrow.book', 'borrow.borrower')->get();
+        return view('pages.fines.index', compact('fines'));
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        // Fetch all borrows to populate the select options in your form
+        $borrows = Borrow::all();
+
+        return view('pages.fines.create', compact('borrows'));
     }
 
     /**
@@ -28,7 +34,17 @@ class LateReturnFineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'borrow_id' => 'required|exists:borrows,id',
+            'amount' => 'required|numeric|min:0',
+            'payment_type' => 'required',
+            'payment_date' => 'required|date',
+        ]);
+
+        $fine = LateReturnFine::create($validated);
+
+        return redirect()->route('late_return_fines.index')
+            ->with('success', 'Fine created successfully.');
     }
 
     /**
@@ -36,7 +52,7 @@ class LateReturnFineController extends Controller
      */
     public function show(LateReturnFine $lateReturnFine)
     {
-        //
+        return view('pages.fines.show', compact('lateReturnFine'));
     }
 
     /**
@@ -44,22 +60,36 @@ class LateReturnFineController extends Controller
      */
     public function edit(LateReturnFine $lateReturnFine)
     {
-        //
+        $borrows = Borrow::all();
+
+        return view('pages.fines.edit', compact('lateReturnFine', 'borrows'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LateReturnFine $lateReturnFine)
+    public function update(Request $request, LateReturnFine $fine)
     {
-        //
+        $validated = $request->validate([
+            'borrow_id' => 'required|exists:borrows,id',
+            'amount' => 'required|numeric|min:0',
+            'payment_type' => 'required',
+            'payment_date' => 'required|date',
+        ]);
+
+        $fine->update($validated);
+
+        return redirect()->route('late_return_fines.index')
+            ->with('success', 'Fine updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LateReturnFine $lateReturnFine)
+    public function destroy(LateReturnFine $fine)
     {
-        //
+        $fine->delete();
+        return redirect()->route('late_return_fines.index')
+            ->with('success', 'Fine deleted successfully');
     }
 }

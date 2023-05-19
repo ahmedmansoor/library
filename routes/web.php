@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowController;
+use App\Http\Controllers\BorrowerController;
+use App\Http\Controllers\LateReturnFineController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::resource('users', RegisteredUserController::class);
+Route::resource('books', BookController::class);
+Route::resource('borrowers', BorrowerController::class);
+Route::resource('borrows', BorrowController::class);
+Route::resource('fines', LateReturnFineController::class);
+
+require __DIR__ . '/auth.php';

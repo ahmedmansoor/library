@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    /* fonts */
+    @font-face {
+       font-family: Wilden;
+       src: url("../fonts/Wilden.ttf");
+   }
+
+    @font-face {
+       font-family: Graphik;
+       src: url("../fonts/GraphikRegular.otf");
+   }
+
+   @font-face {
+       font-family: HelveticaNowRegular;
+       src: url("../fonts/HelveticaNowRegular.ttf");
+   }
+
+    @font-face {
+       font-family: HelveticaNowMedium;
+       src: url("../fonts/HelveticaNowMedium.ttf");
+   }
+
+   @font-face {
+       font-family: HelveticaNowBold;
+       src: url("../fonts/HelveticaNowBold.ttf");
+   }
+}
