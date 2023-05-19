@@ -29,3 +29,80 @@
        src: url("../fonts/HelveticaNowBold.ttf");
    }
 }
+
+@layer components {
+  .h1 {
+    @apply max-w-2xl mb-4 text-4xl font-extrabold
+            leading-none dark:text-white text-gray-800
+            font-helveticaNowBold;
+  }
+
+  .h2 {
+    @apply max-w-2xl mb-4 text-3xl font-extrabold
+            leading-none dark:text-white text-gray-800
+            font-helveticaNowBold;
+  }
+
+  .h3 {
+    @apply max-w-2xl mb-4 text-xl font-extrabold
+            leading-none dark:text-white text-gray-800
+            font-helveticaNowBold;
+  }
+
+  .h4 {
+    @apply max-w-2xl mb-4 text-lg font-extrabold
+            leading-none dark:text-white text-gray-800
+            font-helveticaNowBold;
+  }
+
+  .btn-secondary{
+    @apply inline-flex items-center justify-center px-3 py-2
+             font-medium text-center text-gray-600 border-gray-300 rounded-md
+            bg-neutral-500 bg-opacity-10 hover:bg-opacity-20 dark:text-white
+            dark:border-gray-700 dark:hover:bg-gray-700;
+  }
+
+  .btn-primary{
+    @apply inline-flex items-center justify-center px-3 py-2
+            font-medium text-center text-white rounded-md bg-primary hover:bg-primary_hard;
+  }
+
+  .form {
+    @apply w-1/2 flex flex-col space-y-2;
+  }
+
+  .label {
+    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+  }
+
+  .input-field {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm
+           rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+           dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  }
+
+  .table-style {
+    @apply w-full text-sm text-left text-gray-500 dark:text-gray-400;
+  }
+
+  .thread {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-bg_darker dark:text-gray-400;
+  }
+
+  .th {
+    @apply px-6 py-3;
+  }
+
+  .tr {
+    @apply bg-white border-b dark:bg-bg_dark dark:border-bg_darker hover:bg-gray-50 dark:hover:bg-gray-600;
+  }
+
+  .td-main {
+    @apply px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white;
+  }
+
+  .td {
+    @apply px-6 py-4;
+  }
+}

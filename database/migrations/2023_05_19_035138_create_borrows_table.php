@@ -18,7 +18,7 @@ return new class extends Migration
             $table->dateTime('issue_date');
             $table->dateTime('due_date');
             $table->dateTime('return_date')->nullable();
-            $table->enum('is_late', ['no', 'yes']);
+            $table->boolean('is_late')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

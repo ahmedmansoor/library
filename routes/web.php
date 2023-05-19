@@ -34,9 +34,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('users', RegisteredUserController::class);
+
 Route::resource('books', BookController::class);
+Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
+
 Route::resource('borrowers', BorrowerController::class);
+
 Route::resource('borrows', BorrowController::class);
+Route::get('/returns/create', [BorrowController::class, 'createReturn'])->name('returns.create');
+
 Route::resource('fines', LateReturnFineController::class);
 
 require __DIR__ . '/auth.php';

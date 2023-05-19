@@ -1,31 +1,40 @@
-
 @extends('layouts.app')
 @section('content')
 @include ('alerts.flash-messages')
 
 <section class="wrapper flex flex-col md:flex-row md:justify-between md:space-x-10">
     <div class="ml-72 w-2/3">
-        <h4 class="h4">Books</h4>
+        <div class="flex flex-row justify-between mb-10">
+            <h4 class="text-xl">Books</h4>
+            <div>
+                <a href="{{route('books.create')}}" class="btn-primary" />
+                    New book
+                </a>
+                 <a href="{{route('borrows.create')}}" class="btn-primary" />
+                Record a checkout
+                </a>
+            </div>
+        </div>
         <div class="relative shadow sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-bg_darker dark:text-gray-400">
+            <table class="table-style">
+                <thead class="thread">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="th">
                             Name
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="th">
                             Title
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="th">
                             Author
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="th">
                             Publisher Name
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="th">
                             Year
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="th">
                             <span class="sr-only">Edit</span>
                         </th>
                     </tr>
@@ -33,20 +42,20 @@
                 <tbody>
                     @if($books)
                     @foreach($books as $book)
-                    <tr class="bg-white border-b dark:bg-bg_dark dark:border-bg_darker hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td scope="row" class="px-6 py-4">
+                    <tr class="tr">
+                        <td scope="row" class="td">
                             {{ $book->name }}
                         </td>
-                        <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td class="td-main">
                             {{ $book->title }}
-                        </th>
-                        <td class="px-6 py-4">
+                        </td>
+                        <td class="td">
                         {{ $book->author }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="td">
                         {{ $book->publisher_name }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="td">
                         {{ $book->year }}
                         </td>
                         <td class="px-6 py-4 text-right">

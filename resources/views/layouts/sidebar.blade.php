@@ -23,7 +23,7 @@ items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-g
         </div>
         <ul class="space-y-2 flex-1 px-2 mt-5">
             <li>
-                <a href="{{route('books.index')}}" class="{{(request()->is('/books*')) ?
+                <a href="{{route('books.index')}}" class="{{(request()->is('*books*')) ?
                 'flex items-center p-2 text-base rounded-lg text-primary dark:text-white bg-primary bg-opacity-10 dark:bg-bg_darker'
                 :
                 'flex items-center p-2 text-base text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-bg_dark'
@@ -33,7 +33,7 @@ items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-g
                 </a>
             </li>
             <li>
-                <a href="{{route('borrowers.index')}}" class="{{(request()->is('/borrowers*')) ?
+                <a href="{{route('borrowers.index')}}" class="{{(request()->is('*borrowers*')) ?
                 'flex items-center p-2 text-base rounded-lg text-primary dark:text-white bg-primary bg-opacity-10 dark:bg-bg_darker'
                 :
                 'flex items-center p-2 text-base text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-bg_dark'
@@ -43,7 +43,7 @@ items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-g
                 </a>
             </li>
             <li>
-                <a href="{{route('borrows.index')}}" class="{{(request()->is('/borrows*')) ?
+                <a href="{{route('borrows.index')}}" class="{{(request()->is('*borrows*')) ?
                 'flex items-center p-2 text-base rounded-lg text-primary dark:text-white bg-primary bg-opacity-10 dark:bg-bg_darker'
                 :
                 'flex items-center p-2 text-base text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-bg_dark'
@@ -53,13 +53,13 @@ items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-g
                 </a>
             </li>
             <li>
-                <a href="{{route('users.index')}}" class="{{(request()->is('/users*')) ?
+                <a href="{{route('fines.index')}}" class="{{(request()->is('*fines*')) ?
                 'flex items-center p-2 text-base rounded-lg text-primary dark:text-white bg-primary bg-opacity-10 dark:bg-bg_darker'
                 :
                 'flex items-center p-2 text-base text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-bg_dark'
                 }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
-                <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
+                <span class="flex-1 ml-3 whitespace-nowrap">Fines</span>
                 </a>
             </li>
         </ul>

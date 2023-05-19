@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Borrow;
 use App\Models\Borrower;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BorrowController extends Controller
@@ -36,18 +37,17 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'borrower_id' => 'required|exists:borrowers,id',
             'book_id' => 'required|exists:books,id',
             'issue_date' => 'required|date',
             'due_date' => 'required|date|after:issue_date',
-            'is_late' => 'required|in:no,yes',
         ]);
 
-        $borrow = Borrow::create($validated);
+        Borrow::create($request->all());
 
         return redirect()->route('borrows.index')
-            ->with('success', 'Borrowing created successfully.');
+            ->with('success', 'Borrow record created successfully.');
     }
 
     /**
@@ -74,19 +74,31 @@ class BorrowController extends Controller
      */
     public function update(Request $request, Borrow $borrow)
     {
-        $validated = $request->validate([
+        $request->validate([
             'borrower_id' => 'required|exists:borrowers,id',
             'book_id' => 'required|exists:books,id',
             'issue_date' => 'required|date',
             'due_date' => 'required|date|after:issue_date',
-            'return_date' => 'nullable|date|after_or_equal:issue_date',
-            'is_late' => 'required|in:no,yes',
+            'return_date' => 'nullable|date|after:issue_date',
+            'fine_amount' => $borrow->is_late ? 'required|numeric|min:0' : 'nullable',
+            'payment_type' => $borrow->is_late ? 'required|in:cash,credit_card,debit_card' : 'nullable',
         ]);
 
-        $borrow->update($validated);
+        $borrow->update($request->all());
+
+        if ($borrow->is_late) {
+            $borrow->late_return_fine()->updateOrCreate(
+                ['borrow_id' => $borrow->id],
+                [
+                    'amount' => $request->fine_amount,
+                    'payment_type' => $request->payment_type,
+                    'payment_date' => now(),
+                ]
+            );
+        }
 
         return redirect()->route('borrows.index')
-            ->with('success', 'Borrowing updated successfully.');
+            ->with('success', 'Borrow record updated successfully.');
     }
 
     /**
@@ -97,5 +109,57 @@ class BorrowController extends Controller
         $borrow->delete();
         return redirect()->route('borrows.index')
             ->with('success', 'Borrow deleted successfully');
+    }
+
+    /**
+     * Show the form for creating a new return.
+     */
+    public function createReturn(Request $request)
+    {
+        $borrowerName = $request->get('borrower_name');
+
+        $borrows = Borrow::whereHas('borrower', function ($query) use ($borrowerName) {
+            $query->where('name', 'like', "%$borrowerName%");
+        })->get();
+
+        if ($borrows->isEmpty()) {
+            return back()->with('error', 'No matching borrowers found.');
+        }
+
+        // The Carbon instance is created for comparing dates
+        $today = Carbon::now();
+
+        // This array will store the information to be returned
+        $borrowInfo = [];
+
+        foreach ($borrows as $borrow) {
+            $lateReturnFine = $borrow->late_return_fine;
+            $isLate = $today->greaterThan($borrow->due_date);
+
+            $borrowInfo[] = [
+                'borrow_id' => $borrow->id,
+                'book_title' => $borrow->book->title,
+                'due_date' => $borrow->due_date,
+                'is_late' => $isLate,
+                'late_fee' => $isLate && $lateReturnFine ? $lateReturnFine->amount : 0,
+                'payment_type' => $isLate && $lateReturnFine ? $lateReturnFine->payment_type : null
+            ];
+        }
+
+        return view('pages.borrows.return', compact('borrowInfo'));
+    }
+
+
+
+    /**
+     * Store a newly created return in storage.
+     */
+    public function storeReturn(Request $request)
+    {
+        // Validate the request...
+
+        // Mark the book as returned...
+
+        return redirect()->route('returns.create')->with('success', 'Book returned successfully');
     }
 }

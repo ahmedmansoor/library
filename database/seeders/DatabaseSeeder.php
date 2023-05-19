@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call(UserSeeder::class);
+        $this->call(UserSeeder::class);
 
-        // User::factory(10)->create();
-        // Borrower::factory(10)->create();
-        // Book::factory(10)->create();
-        // Borrow::factory(10)->create();
-        // LateReturnFine::factory(10)->create();
+        User::factory(10)->create();
+        Borrower::factory(10)->create();
+        Book::factory(10)->create();
+        // Borrow::factory(5)->create();
+        // LateReturnFine::factory(5)->create();
     }
 }
